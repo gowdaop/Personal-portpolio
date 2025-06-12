@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Portfolio Website</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Gowda</a>
+
+        <nav>
+            <a href="#" class="active"> Home</a>
+            <a href="skills.html" >Skills</a>
+            <a href="education.html" >Education</a>
+            
+            <a href="#contact" >Contact</a>
+        </nav>
+    </header>
+    <section class="home">
+        <div class="home-img">
+            <img src="main.jpg" alt="">
+        </div>
+        <div class="home-content">
+            <h1>Hi, It's <span>K S Vignesh</span></h1>
+            <h3 class="typing-text">I'm a <span></span></h3>
+            <p>As a student at JSS Academy of Technical Education, I am immersing myself in Artificial Intelligence, an education that fuels our creative processes with innovative solutions.At the intersection of technology and storytelling, I carve out captivating videos and thumbnails that capture the essence of the narrative</p>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/gowdaop/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/gowdaop" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://x.com/GowdaOP" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/gowdaop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="resume.pdf" class="btn" target="_blank" download>Hire me</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title">Get In <span>Touch</span></h2>
+            <p class="contact-subtitle">Let's connect and discuss opportunities</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item" onclick="copyToClipboard('vigneshks@example.com')">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p id="email">vigneshks@example.com</p>
+                            <span class="copy-hint">Click to copy</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item" onclick="copyToClipboard('+91 9876543210')">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p id="phone">+91 9876543210</p>
+                            <span class="copy-hint">Click to copy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="emailInput" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn contact-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <script>
+        // Copy to clipboard functionality
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                showToast('Copied to clipboard!');
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('Copied to clipboard!');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+    
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('emailInput').value;
+        const message = document.getElementById('message').value;
+
+        fetch('http://localhost:5000/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, message })
+    })
+        .then(response => response.json())
+        .then(data => {
+            showToast('Message sent successfully!');
+            this.reset();
+    })
+        .catch(error => {
+            showToast('Error sending message.');
+            console.error('Error:', error);
+    });
+});
+
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe the contact section
+        const contactSection = document.querySelector('.contact');
+        if (contactSection) {
+            observer.observe(contactSection);
+        }
+
+        // Add scroll-triggered animations for individual elements
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.contact-item, .contact-form');
+            elements.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.animationDelay = `${0.8 + (index * 0.2)}s`;
+                    element.classList.add('animate-in');
+                }
+            });
+        };
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Run once on page load
+        animateOnScroll();
+    </script>
+</body>
+</html>

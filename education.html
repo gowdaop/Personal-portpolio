@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Education - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html{
+            font-size: 62.5%;
+        }
+
+        body{
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-color: black;
+            color: white;
+        }
+
+        header{
+            margin-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 9%;
+            background-color: transparent;
+            filter: drop-shadow(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo{
+            font-size: 3rem;
+            color: #eb3939;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.5s ease;
+        }
+
+        .logo:hover{
+            transform: scale(1.1);
+        }
+
+        nav a{
+            font-size: 1.8rem;
+            color: white;
+            margin-left: 4rem;
+            font-weight: 500;
+            transition: 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover,
+        nav a.active{
+            color: #b74b4b;
+            border-bottom: 3px solid #b74b4b;
+        }
+
+        .education-section {
+            min-height: 100vh;
+            padding: 10rem 9% 5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 8rem;
+        }
+
+        .section-title h1 {
+            font-size: 6rem;
+            color: white;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .section-title h1 span {
+            color: #ff3f3f;
+        }
+
+        .section-title p {
+            font-size: 1.6rem;
+            color: white;
+            max-width: 80rem;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .education-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+            gap: 5rem;
+            margin-top: 6rem;
+        }
+
+        .education-card {
+            background-color: transparent;
+            border: 0.2rem solid #b74b4b;
+            padding: 4rem 3rem;
+            border-radius: 2rem;
+            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(183, 75, 75, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .education-card:hover::before {
+            left: 100%;
+        }
+
+        .education-card:hover {
+            transform: translateY(-1rem);
+            box-shadow: 0 0 25px #b74b4b;
+            background-color: rgba(183, 75, 75, 0.05);
+        }
+
+        .education-level {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .education-level i {
+            margin-right: 1rem;
+            color: #ff3f3f;
+            font-size: 2.5rem;
+        }
+
+        .education-details {
+            position: relative;
+            z-index: 2;
+        }
+
+        .detail-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem 0;
+            border-bottom: 0.1rem solid rgba(183, 75, 75, 0.3);
+            transition: 0.3s ease;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-item:hover {
+            transform: translateX(1rem);
+            padding-left: 1rem;
+        }
+
+        .detail-label {
+            font-size: 1.4rem;
+            color: #ff3f3f;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+
+        .detail-value {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .percentage-display, .cgpa-display {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff3f3f, #b74b4b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background-color: rgba(183, 75, 75, 0.2);
+            color: #ff3f3f;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background-color: black;
+            border-radius: 4rem;
+            font-size: 1.6rem;
+            color: #b74b4b;
+            letter-spacing: 0.3rem;
+            font-weight: 600;
+            border: 2px solid #b74b4b;
+            transition: 0.3s ease;
+            cursor: pointer;
+            position: fixed;
+            bottom: 3rem;
+            right: 3rem;
+        }
+
+        .back-btn:hover{
+            transform: scale(1.03);
+            background-color: #b74b4b;
+            color: black;
+            box-shadow: 0 0 25px #b74b4b;
+        }
+
+        @media(max-width:995px){
+            nav{
+                position: absolute;
+                display: none;
+                top: 0;
+                right: 0;
+                width: 40%;
+                border-left: 3px solid #b74b4b;
+                border-bottom: 3px solid #b74b4b;
+                border-bottom-left-radius: 2rem;
+                padding: 1rem solid;
+                background-color: #161616;
+                border-top: 0.1rem solid rgba(0,0,0,0.1);
+            }
+
+            nav.active{
+                display: block;
+            }
+
+            nav a{
+                display: block;
+                font-size: 2rem;
+                margin: 3rem 0;
+            }
+
+            nav a:hover,
+            nav a.active{
+                padding: 1rem;
+                border-radius: 0.5rem;
+                border-bottom: 0.5rem solid #b74b4b;
+            }
+
+            .education-section {
+                padding: 8rem 5% 5rem;
+            }
+
+            .section-title h1 {
+                font-size: 4rem;
+            }
+
+            .education-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .education-card {
+                padding: 3rem 2rem;
+            }
+
+            .education-level {
+                font-size: 2.5rem;
+            }
+
+            .back-btn {
+                bottom: 2rem;
+                right: 2rem;
+                padding: 0.8rem 2rem;
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title h1 {
+                font-size: 3.5rem;
+            }
+            
+            .education-level {
+                font-size: 2rem;
+            }
+            
+            .detail-value {
+                font-size: 1.6rem;
+            }
+
+            .detail-label {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animation for cards */
+        .education-card {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .education-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .education-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .education-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Gowda</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="skills.html">Skills</a>
+            <a href="#" class="active">Education</a>
+            
+            <a href="#contact" >Contact</a>
+        </nav>
+    </header>
+
+    <section class="education-section">
+        <div class="section-title">
+            <h1>My <span>Education</span></h1>
+            <p>My educational journey has been a foundation for my growth in technology and innovation. Here's a detailed overview of my academic achievements and milestones.</p>
+        </div>
+
+        <div class="education-container">
+            <!-- Schooling -->
+            <div class="education-card">
+                <h3 class="education-level">
+                    <i class="fas fa-school"></i>
+                    Schooling
+                </h3>
+                <div class="education-details">
+                    <div class="detail-item">
+                        <div class="detail-label">School Name</div>
+                        <div class="detail-value">JSS PUBLIC SCHOOL</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Board</div>
+                        <div class="detail-value">CBSE</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Year of Completion</div>
+                        <div class="detail-value">2020<span class="year-badge">Completed</span></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Percentage</div>
+                        <div class="detail-value">
+                            <span class="percentage-display">75.5%</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Stream</div>
+                        <div class="detail-value">Science with Mathematics</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUC -->
+            <div class="education-card">
+                <h3 class="education-level">
+                    <i class="fas fa-graduation-cap"></i>
+                    Pre-University (PUC)
+                </h3>
+                <div class="education-details">
+                    <div class="detail-item">
+                        <div class="detail-label">College Name</div>
+                        <div class="detail-value">Sri chaithanya</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Board</div>
+                        <div class="detail-value">Karnataka PUC Board</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Year of Completion</div>
+                        <div class="detail-value">2022<span class="year-badge">Completed</span></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Percentage</div>
+                        <div class="detail-value">
+                            <span class="percentage-display">89.2%</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Stream</div>
+                        <div class="detail-value">Science (PCMCs)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Engineering -->
+            <div class="education-card">
+                <h3 class="education-level">
+                    <i class="fas fa-university"></i>
+                    Engineering
+                </h3>
+                <div class="education-details">
+                    <div class="detail-item">
+                        <div class="detail-label">College Name</div>
+                        <div class="detail-value">JSS Academy of Technical Education</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Degree</div>
+                        <div class="detail-value">Bachelor of Engineering</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Specialization</div>
+                        <div class="detail-value">Artificial Intelligence & Machine Learning</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Current Year</div>
+                        <div class="detail-value">3rd Year<span class="year-badge">Pursuing</span></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">CGPA</div>
+                        <div class="detail-value">
+                            <span class="cgpa-display">8.3/10</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Expected Graduation</div>
+                        <div class="detail-value">2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+</body>
+</html>
