@@ -69,32 +69,6 @@ Personal-portfolio/
    - Simply open `index.html` in your web browser
    - Or use a live server extension for development
 
-## 📱 Sections
-
-### 🏠 Home
-- Hero section with introduction
-- Professional tagline and call-to-action
-
-### 👨‍💻 About
-- Personal background and story
-- Skills and expertise
-- Education and certifications
-
-### 💼 Projects
-- Featured projects with descriptions
-- Technology stack used
-- Live demo and GitHub links
-
-### 🛠️ Skills
-- Technical skills with proficiency levels
-- Tools and technologies
-- Programming languages
-
-### 📞 Contact
-- Contact information
-- Social media links
-- Contact form for inquiries
-
 ## 🎨 Customization
 
 ### Updating Personal Information
@@ -148,16 +122,7 @@ While this is a personal portfolio, suggestions and feedback are welcome!
 4. Push to the branch (`git push origin feature/improvement`)
 5. Open a Pull Request
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-- **Email**: [your.email@example.com](mailto:your.email@example.com)
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- **Twitter**: [@yourusername](https://twitter.com/yourusername)
-- **Portfolio**: [Live Website](https://gowdaop.github.io/Personal-portpolio/)
 
 ## 🙏 Acknowledgments
 
@@ -169,4 +134,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ⭐ Star this repository if you found it helpful!
 
-**Made with ❤️ by [Your Name]**
+**Made by KS VIGNESH**
